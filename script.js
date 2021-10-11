@@ -13,45 +13,58 @@ const expiration = document.getElementById("expiration");
 
 parkingForm.addEventListener('submit', (event) => {
     event.preventDefault();
-    validateName();
-    validateCarYear();
-    validateCarMake();
-    validateCarModel();
-    validateDays();
-    validateCreditCard(creditCard.value);
-    validateCVV();
-    validateExpiration();
+    validateName(nameField);
+    validateCarYear(carYear);
+    validateCarMake(carMake);
+    validateCarModel(carModel);
+    validateDays(days);
+    validateCreditCard(creditCard);
+    validateCVV(cvv);
+    validateExpiration(expiration);
 })
 
-function validateName() {
-    if (/\d/.test(nameField.value) === true || nameField.value === '')
-    {
-        nameField.parentElement.classList.remove('input-valid');
-        nameField.parentElement.classList.add('input-invalid');
+function validateName(input) {
+    if (/\d/.test(input.value) === true || input.value === '') {
+        input.parentElement.classList.remove('input-valid');
+        input.parentElement.classList.add('input-invalid');
     }
     else {
-        nameField.parentElement.classList.remove('input-invalid');
-        nameField.parentElement.classList.add('input-valid');
+        input.parentElement.classList.remove('input-invalid');
+        input.parentElement.classList.add('input-valid');
     }
-
 }
 
-function validateCarYear() {
-    if (carYear.value <= 1900) {
-        carYear.classList.remove('input-valid');
-        carYear.classList.add('input-invalid');
+function validateCarYear(input) {
+    if (input.value < 1900 || input.value === '') {
+        input.classList.remove('input-valid');
+        input.classList.add('input-invalid');
     }
     else {
-        carYear.classList.remove('input-invalid');
-        carYear.classList.add('input-valid');
+        input.classList.remove('input-invalid');
+        input.classList.add('input-valid');
     }
     // let errorEL = document.createElement('p')
     // document.getElementById(divnamehere).appendChild(errorEl)
 }
-function validateCarMake() {
-
+function validateCarMake(input) {
+    if (input.value === '') {
+        input.classList.remove('input-valid');
+        input.classList.add('input-invalid');
+    }
+    else {
+        input.classList.remove('input-invalid');
+        input.classList.add('input-valid');
+    }
 }
-function validateCarModel() {
+function validateCarModel(input) {
+    if (input.value === '') {
+        input.classList.remove('input-valid');
+        input.classList.add('input-invalid');
+    }
+    else {
+        input.classList.remove('input-invalid');
+        input.classList.add('input-valid');
+    }
 
 }
 // function validateStartDate() {
@@ -67,7 +80,6 @@ function validateDays() {
         days.parentElement.classList.remove('input-valid');
         days.parentElement.classList.add('input-invalid');
     }
-
 }
 function validateCreditCard(number) {
     var regex = new RegExp("^[0-9]{16}$");
@@ -92,12 +104,28 @@ function luhnCheck(val) {
     return (sum % 10) == 0;
 }
 
-function validateCVV() {
+function validateCVV(input) {
+    if (input.value.length != 3) {
+        input.parentElement.classList.remove('input-valid');
+        input.parentElement.classList.add('input-invalid');
+    }
+    else {
+        input.parentElement.classList.remove('input-invalid');
+        input.parentElement.classList.add('input-valid');
+    }
 
 }
 
-function validateExpiration() {
-    
+function validateExpiration(input) {
+    let month = input.value.substring(0,2)
+    let year = input.value.substring(3,5)
+    let validMonth = month > 0 && month <= 12
+    // let validYear = 
+    let validSlash = input.value.indexOf('/') === 2
+    console.log(month)
+    console.log(year)
+    console.log(validSlash)
+
 }
 
 function validateEmail(input) {
